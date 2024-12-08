@@ -35,11 +35,13 @@
     </script>
   </head>
   <body class="container lg:px-16 px-4 font-Lexend mb-20">
-    <header class="lg:sticky top-0 py-6">
+    <header class="lg:sticky top-0">
       <nav
-        class="flex flex-col items-center lg:flex-row space-y-4 lg:justify-between bg-[#F9F7F3E6]"
+        class="flex flex-col items-center lg:flex-row space-y-4 lg:justify-between bg-[#fbf7f1] px-4"
       >
         <button
+          onclick="blogHandleEvent('./blog.html')"
+          id="blog_btn"
           class="w-full lg:w-24 p-2 font-primary rounded-sm font-bold bg-btnColor"
         >
           Blog
@@ -50,22 +52,30 @@
         </div>
         <div class="font-textColor flex items-center">
           <img class="mr-4 w-10" src="./assets/coin.png" />
-          <span>5500</span>
+          <span id="main-balance">10000</span>
           <span>BDT</span>
         </div>
       </nav>
-      <div class="text-center mt-12">
+      <div class="text-center pt-6 bg-[#ffffffb3]">
         <button
+          onclick="handleMain('btn_donate','btn_history')"
+          id="btn_donate"
           class="px-8 p-2 font-primary bg-btnColor rounded-sm font-bold border-2 mr-6"
         >
           Donate
         </button>
-        <button class="px-8 p-2 font-primary rounded-sm font-bold border-2">
+        <button
+          onclick="handleHistory('btn_donate','btn_history')"
+          id="btn_history"
+          class="px-8 p-2 font-primary rounded-sm font-bold border-2"
+        >
           History
         </button>
       </div>
     </header>
-    <main>
+
+    <div id="history_section" class="hidden"></div>
+    <main id="main_container">
       <section class="mt-12">
         <div class="flex flex-col lg:flex-row gap-12">
           <div class="w-full">
@@ -75,7 +85,7 @@
           <div class="w-full h-full-1">
             <button class="flex bg-[#1111111A] rounded-sm gap-1 px-4 py-2">
               <img src="./assets/coin.png" />
-              <span class="text-textColor">1000</span>
+              <span id="noakhali-balance" class="text-textColor">1000</span>
               <span>BDT</span>
             </button>
             <h3 class="text-primary font-bold my-4 lg:my-8">
@@ -90,15 +100,34 @@
               lives of those in need.
             </p>
             <input
+              id="text-input-noakhali1"
               type="text"
               placeholder="Write Donation Amount "
-              class="input input-bordered w-full lg:w-3/4 my-4 lg:my-8"
+              class="inputText input input-bordered w-full lg:w-3/4 my-4 lg:my-8"
             />
             <button
+              onclick="my_modal_1.showModal() , handleClickListener('text-input-noakhali1','noakhali-balance','main-balance'), myFunction('text-input-noakhali1', 'Noakhali, Bangladesh.')"
               class="bg-btnColor text-center font-bold w-full lg:w-3/4 my-4 lg:my-8 rounded-sm py-2"
             >
               Donate Now
             </button>
+
+            <dialog
+              id="my_modal_1"
+              class="modal bg-white w-[500px] h-[300px] rounded-xl mx-auto mt-32"
+            >
+              <form method="dialog">
+                <h2 class="text-primary font-serif text-4xl">Congratulate!</h2>
+                <img src="./assets/coin.png" class="mx-auto my-4" />
+                <p class="text-textColor">You Have Donated Humankend</p>
+                <h3 class="text-pramary font-bold text-2xl text-center my-6">
+                  Successfully
+                </h3>
+                <button class="btn bg-[#1111111A] w-full">
+                  Close Confirmation
+                </button>
+              </form>
+            </dialog>
           </div>
         </div>
       </section>
@@ -111,11 +140,11 @@
           <div class="w-full h-full-1">
             <button class="flex bg-[#1111111A] rounded-sm gap-1 px-4 py-2">
               <img src="./assets/coin.png" />
-              <span class="text-textColor">1000</span>
+              <span id="noakhali-balance1" class="text-textColor">1000</span>
               <span>BDT</span>
             </button>
             <h3 class="text-primary font-bold my-4 lg:my-8">
-              Donate for Flood at Noakhali, Bangladesh
+              Donate for Flood at Feni, Bangladesh
             </h3>
             <p class="text-TextColor my-4 lg:my-8 lg:w-3/4 text-justify">
               The recent floods in Feni have devastated local communities,
@@ -128,15 +157,33 @@
               urgent need.
             </p>
             <input
+              id="text-input-noakhali2"
               type="text"
               placeholder="Write Donation Amount "
               class="input input-bordered w-full lg:w-3/4 my-4 lg:my-8"
             />
             <button
+              onclick="my_modal_2.showModal(), handleClickListener('text-input-noakhali2','noakhali-balance1','main-balance'), myFunction('text-input-noakhali2', 'Feni, Bangladesh.')"
               class="bg-btnColor text-center font-bold w-full lg:w-3/4 my-4 lg:my-8 rounded-sm py-2"
             >
               Donate Now
             </button>
+            <dialog
+              id="my_modal_2"
+              class="modal bg-white w-[500px] h-[300px] rounded-xl mx-auto mt-32"
+            >
+              <form method="dialog">
+                <h2 class="text-primary font-serif text-4xl">Congratulate!</h2>
+                <img src="./assets/coin.png" class="mx-auto my-4" />
+                <p class="text-textColor">You Have Donated Humankend</p>
+                <h3 class="text-pramary font-bold text-2xl text-center my-6">
+                  Successfully
+                </h3>
+                <button class="btn bg-[#1111111A] w-full">
+                  Close Confirmation
+                </button>
+              </form>
+            </dialog>
           </div>
         </div>
       </section>
@@ -149,7 +196,7 @@
           <div class="w-full h-full-1">
             <button class="flex bg-[#1111111A] rounded-sm gap-1 px-4 py-2">
               <img src="./assets/coin.png" />
-              <span class="text-textColor">1000</span>
+              <span id="noakhali-balance2" class="text-textColor">1000</span>
               <span>BDT</span>
             </button>
             <h3 class="text-primary font-bold my-4 lg:my-8">
@@ -167,18 +214,40 @@
               their time of need.
             </p>
             <input
+              id="text-input-noakhali3"
               type="text"
               placeholder="Write Donation Amount "
               class="input input-bordered w-full lg:w-3/4 my-4 lg:my-8"
             />
             <button
+              onclick="my_modal_3.showModal(),handleClickListener('text-input-noakhali3','noakhali-balance2','main-balance'), myFunction('text-input-noakhali1', 'Quota Movement, Bangladesh.')"
               class="bg-btnColor text-center font-bold w-full lg:w-3/4 my-4 lg:my-8 rounded-sm py-2"
             >
               Donate Now
             </button>
+            <dialog
+              id="my_modal_3"
+              class="modal bg-white w-[500px] h-[300px] rounded-xl mx-auto mt-32"
+            >
+              <form method="dialog">
+                <h2 class="text-primary font-serif text-4xl">Congratulate!</h2>
+                <img src="./assets/coin.png" class="mx-auto my-4" />
+                <p class="text-textColor">You Have Donated Humankend</p>
+                <h3 class="text-pramary font-bold text-2xl text-center my-6">
+                  Successfully
+                </h3>
+                <button class="btn bg-[#1111111A] w-full">
+                  Close Confirmation
+                </button>
+              </form>
+            </dialog>
           </div>
+          2
         </div>
       </section>
     </main>
+
+    <script src="./js/main.js"></script>
+    <script src="./js/home.js"></script>
   </body>
 </html>
